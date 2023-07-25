@@ -42,4 +42,14 @@ public class WebElementsTest {
 		// faz a validação
 		assertEquals("Antônio Trindade", textFieldBox1.getAttribute("value"));
 	}
+	
+	@Test
+	public void testValidaStatusTextFields() {
+		// Indentificar os elementos
+		WebElement textFieldBoxEnable = driver.findElement(By.name("txtbox1"));
+		WebElement textFieldBoxDisable = driver.findElement(By.name("txtbox2"));
+		
+		assertTrue(textFieldBoxEnable.isEnabled());
+		assertFalse(textFieldBoxDisable.isEnabled());		
+	}
 }
