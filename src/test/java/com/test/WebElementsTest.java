@@ -1,6 +1,8 @@
 package com.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -80,4 +82,28 @@ public class WebElementsTest {
 		assertFalse(radioButtons.get(1).isSelected());
 		assertFalse(radioButtons.get(3).isSelected());		
 	}
+	
+	@Test
+	public void testValidaCheckBox() throws InterruptedException {
+		
+		// Identicar os elementos
+		List<WebElement> checkBoxes = driver.findElements(By.name("chkbox"));
+		
+		for (WebElement cb : checkBoxes) {
+			if ((cb.getAttribute("value").equals("Check 3")) 
+					|| cb.getAttribute("value").equals("Check 4") ){
+				cb.click();
+			}			
+		}
+		Thread.sleep(3000);
+		
+		//Validar todas as posições
+		assertTrue(checkBoxes.get(2).isSelected());
+		assertTrue(checkBoxes.get(3).isSelected());
+		
+		assertFalse(checkBoxes.get(0).isSelected());
+		assertFalse(checkBoxes.get(1).isSelected());
+		
+	}
+	
 }
