@@ -13,6 +13,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 
 public class WebElementsTest {
 
@@ -36,7 +37,7 @@ public class WebElementsTest {
 	public void testValidaTextField() throws InterruptedException {
 
 		// Identifica o elemento na página
-		WebElement textFieldBox1 = driver.findElement(By.name("txtbox1"));
+		WebElement textFieldBox1 = driver.findElement(By.name("txtbox1"));		
 
 		// Faz a iteração com o elemento
 		textFieldBox1.sendKeys("Antônio Trindade");
@@ -105,5 +106,32 @@ public class WebElementsTest {
 		assertFalse(checkBoxes.get(1).isSelected());
 		
 	}
+	
+	@Test
+	public void testValidaSelectSingle() throws InterruptedException {
+		WebElement elementSelectSingle = driver.findElement(By.name("dropdownlist"));
+		
+		Select selectSingle = new Select(elementSelectSingle);
+		
+		assertEquals(10, selectSingle.getOptions().size());
+		
+		// Para fins de aprendizagem
+		for (int i = 0; i < selectSingle.getOptions().size(); i++) {
+			selectSingle.selectByIndex(i);			
+			Thread.sleep(1000);
+		}
+		
+		selectSingle.selectByValue("item5");
+		selectSingle.selectByValue("item4");
+		selectSingle.selectByVisibleText("Item 10");
+				
+		selectSingle.selectByVisibleText("Item 7");
+		
+		Thread.sleep(3000);
+		
+		assertEquals("Item 7", selectSingle.getFirstSelectedOption().getText());				
+	}
+	
+	
 	
 }
