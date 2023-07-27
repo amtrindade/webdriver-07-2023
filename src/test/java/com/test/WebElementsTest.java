@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -192,4 +193,39 @@ public class WebElementsTest {
 		assertTrue(btnIframe.isEnabled());
 		
 	}
+	
+	@Test
+	public void testValidaAlerts() throws InterruptedException {
+		WebElement btnAlert = driver.findElement(By.name("alertbtn"));
+		btnAlert.click();
+		
+		Alert alert = driver.switchTo().alert();
+		assertEquals("Eu sou um alerta!", alert.getText());
+		
+		//Clique no Ok, ou teclar o ENTER
+		alert.accept();
+		
+		WebElement btnConfirm = driver.findElement(By.name("confirmbtn"));
+		btnConfirm.click();
+		
+		Alert confirm = driver.switchTo().alert();
+		assertEquals("Pressione um botão!", confirm.getText());
+		
+		confirm.dismiss();
+		
+		WebElement btnPrompt = driver.findElement(By.id("promptBtn"));
+		btnPrompt.click();
+		
+		Alert prompt = driver.switchTo().alert();
+		assertEquals("Digite o ano:", prompt.getText());
+		
+		prompt.sendKeys("2023");		
+		prompt.accept();
+		
+		Thread.sleep(3000);
+		
+		prompt = driver.switchTo().alert();
+		assertEquals("O ano é 2023?", prompt.getText());		
+	}
+	
 }
