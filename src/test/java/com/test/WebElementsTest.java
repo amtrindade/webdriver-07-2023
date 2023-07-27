@@ -127,11 +127,44 @@ public class WebElementsTest {
 				
 		selectSingle.selectByVisibleText("Item 7");
 		
-		Thread.sleep(3000);
+		Thread.sleep(1000);
 		
-		assertEquals("Item 7", selectSingle.getFirstSelectedOption().getText());				
+		assertEquals("Item 7", selectSingle.getFirstSelectedOption().getText());	
 	}
 	
+	@Test
+	public void testValidaSelectMulti() throws InterruptedException {
+		WebElement elementSelectMulti = driver.findElement(By.name("multiselectdropdown"));
+		
+		Select selectMulti = new Select(elementSelectMulti);
+		
+		assertEquals(10, selectMulti.getOptions().size());
+		
+		selectMulti.selectByVisibleText("Item 8");
+		selectMulti.selectByVisibleText("Item 9");
+		selectMulti.selectByVisibleText("Item 5");
+		
+		List<WebElement> allSelect = selectMulti.getAllSelectedOptions();
+				
+		assertEquals("Item 5", allSelect.get(0).getText());
+		assertEquals("Item 8", allSelect.get(1).getText());
+		assertEquals("Item 9", allSelect.get(2).getText());		
+		
+		Thread.sleep(3000);
+		
+		selectMulti.deselectByVisibleText("Item 8");
+		selectMulti.selectByVisibleText("Item 2");
+		
+		Thread.sleep(3000);
+		
+		allSelect = selectMulti.getAllSelectedOptions();
+		
+		assertEquals(3, allSelect.size());
+		
+		assertEquals("Item 2", allSelect.get(0).getText());		
+		assertEquals("Item 5", allSelect.get(1).getText());
+		assertEquals("Item 9", allSelect.get(2).getText());
+	}
 	
 	
 }
