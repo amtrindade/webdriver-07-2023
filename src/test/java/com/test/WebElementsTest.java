@@ -163,8 +163,33 @@ public class WebElementsTest {
 		
 		assertEquals("Item 2", allSelect.get(0).getText());		
 		assertEquals("Item 5", allSelect.get(1).getText());
-		assertEquals("Item 9", allSelect.get(2).getText());
+		assertEquals("Item 9", allSelect.get(2).getText());			
 	}
 	
-	
+	@Test
+	public void testValidaIframe() throws InterruptedException {
+		
+		// Entrar no iframe				
+		driver.switchTo().frame(0);
+		
+		WebElement tfiFrame = driver.findElement(By.id("tfiframe"));
+		tfiFrame.sendKeys("Hello world!");
+		
+		Thread.sleep(3000);
+		
+		assertEquals("Hello world!", tfiFrame.getAttribute("value"));
+		
+		// Volta para página de origem
+		driver.switchTo().defaultContent();
+		
+		WebElement btnAlert = driver.findElement(By.name("alertbtn"));
+		assertTrue(btnAlert.isEnabled());
+		
+		// Entrar no iframe				
+		driver.switchTo().frame(0);
+		
+		WebElement btnIframe = driver.findElement(By.id("btniframe"));
+		assertTrue(btnIframe.isEnabled());
+		
+	}
 }
