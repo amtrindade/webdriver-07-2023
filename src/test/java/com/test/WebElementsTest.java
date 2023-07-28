@@ -201,7 +201,6 @@ public class WebElementsTest {
 		
 		Alert alert = driver.switchTo().alert();
 		assertEquals("Eu sou um alerta!", alert.getText());
-		
 		//Clique no Ok, ou teclar o ENTER
 		alert.accept();
 		
@@ -209,16 +208,14 @@ public class WebElementsTest {
 		btnConfirm.click();
 		
 		Alert confirm = driver.switchTo().alert();
-		assertEquals("Pressione um botão!", confirm.getText());
-		
+		assertEquals("Pressione um botão!", confirm.getText());		
 		confirm.dismiss();
 		
 		WebElement btnPrompt = driver.findElement(By.id("promptBtn"));
 		btnPrompt.click();
 		
 		Alert prompt = driver.switchTo().alert();
-		assertEquals("Digite o ano:", prompt.getText());
-		
+		assertEquals("Digite o ano:", prompt.getText());		
 		prompt.sendKeys("2023");		
 		prompt.accept();
 		
