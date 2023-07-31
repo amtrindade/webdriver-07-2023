@@ -42,8 +42,7 @@ public class NavigationWindowTest {
 		// Monta o array de posições das tabs
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(1));
-				
-		Thread.sleep(3000);
+						
 		assertEquals("jQuery UI Droppable - Default functionality", driver.getTitle());			
 		
 		driver.switchTo().window(tabs.get(2));
@@ -55,8 +54,7 @@ public class NavigationWindowTest {
 		driver.switchTo().window(tabs.get(1));
 		assertEquals("jQuery UI Droppable - Default functionality", driver.getTitle());
 		driver.close();
-		
-		Thread.sleep(3000);
+			
 		
 		driver.switchTo().window(tabs.get(0));				
 		assertEquals("Treino Automação de Testes", driver.getTitle());

@@ -118,8 +118,7 @@ public class WebElementsTest {
 		
 		// Para fins de aprendizagem
 		for (int i = 0; i < selectSingle.getOptions().size(); i++) {
-			selectSingle.selectByIndex(i);			
-			Thread.sleep(1000);
+			selectSingle.selectByIndex(i);						
 		}
 		
 		selectSingle.selectByValue("item5");
@@ -166,7 +165,7 @@ public class WebElementsTest {
 		assertEquals("Item 5", allSelect.get(1).getText());
 		assertEquals("Item 9", allSelect.get(2).getText());			
 	}
-	
+		
 	@Test
 	public void testValidaIframe() throws InterruptedException {
 		
