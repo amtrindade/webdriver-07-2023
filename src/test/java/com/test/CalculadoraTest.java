@@ -31,6 +31,7 @@ public class CalculadoraTest {
 		System.setProperty("webdriver.chrome.driver", "/home/atrindade/Dev/drivers/chromedriver");
 		driver = new ChromeDriver();
 		
+		//instanciar
 		random = new Random();
 		
 		val1 = random.nextInt(1, 20);
