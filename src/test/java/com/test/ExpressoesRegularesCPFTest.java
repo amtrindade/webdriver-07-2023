@@ -1,6 +1,5 @@
 package com.test;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.time.Duration;
@@ -13,7 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class ExpressoesRegularesTest {
+public class ExpressoesRegularesCPFTest {
 	
 	private WebDriver driver;
 
@@ -45,5 +44,18 @@ public class ExpressoesRegularesTest {
 		System.out.println(cpfGerado);
 		
 		assertTrue(cpfGerado.matches("^[0-9]{3}\\.[0-9]{3}\\.[0-9]{3}-[0-9]{2}$"));		
+	}
+	
+	@Test
+	public void testCpfSemPontuacao() {
+		WebElement btnGerar = driver.findElement(By.id("btn-gerar-cpf"));
+		btnGerar.click();
+		
+		WebElement tfCpf = driver.findElement(By.id("numero"));
+		String cpfGerado = tfCpf.getAttribute("value");
+		
+		System.out.println(cpfGerado);
+		
+		assertTrue(cpfGerado.matches("^[0-9]{11}$"));
 	}
 }
