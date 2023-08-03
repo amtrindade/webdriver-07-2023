@@ -8,34 +8,29 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ExpressoesRegularesCNPJTest {
 	
 	private WebDriver driver;
+	private WebDriverWait wait;
 
 	@Before
 	public void setUp() throws Exception {
 		System.setProperty("webdriver.chrome.driver", "/home/atrindade/Dev/drivers/chromedriver");
 		driver = new ChromeDriver();
+		wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
 		driver.get("https://www.4devs.com.br/gerador_de_cnpj");
-		
-				
-		
+					
 		Thread.sleep(3000);
-//		WebElement body = driver.findElement(By.xpath("//body"));
-//		body.sendKeys(Keys.chord(Keys.CONTROL, "l"));
-//		body.sendKeys(Keys.ENTER);	
 		
-		Actions actionObj = new Actions(driver);
-		actionObj.keyDown(Keys.CONTROL)
-		         .sendKeys(Keys.chord("l"))		         
-		         .perform();
+//		WebElement linkCNPJ = driver.findElement(By.xpath("//*[@id='top-nav']/li[17]/a"));
+//		linkCNPJ.click();		
 	}
 
 	@After
@@ -48,7 +43,8 @@ public class ExpressoesRegularesCNPJTest {
 		WebElement btnGerar = driver.findElement(By.id("bt_gerar_cnpj"));
 		btnGerar.click();
 		
-		Thread.sleep(2000);
+		//Espera pelo texto estar invisível no elemento.
+		wait.until(ExpectedConditions.invisibilityOfElementWithText(By.id("texto_cnpj"), "Gerando..."));
 		
 		WebElement divTextoCnpj = driver.findElement(By.id("texto_cnpj"));
 		String cnpjGerado = divTextoCnpj.getText();
@@ -66,7 +62,8 @@ public class ExpressoesRegularesCNPJTest {
 		WebElement btnGerar = driver.findElement(By.id("bt_gerar_cnpj"));
 		btnGerar.click();
 		
-		Thread.sleep(2000);
+		//Espera pelo texto estar invisível no elemento.
+		wait.until(ExpectedConditions.invisibilityOfElementWithText(By.id("texto_cnpj"), "Gerando..."));
 		
 		WebElement divTextoCnpj = driver.findElement(By.id("texto_cnpj"));
 		String cnpjGerado = divTextoCnpj.getText();

@@ -68,6 +68,7 @@ public class CalculadoraTest {
 		
 		// Espera explícita
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(6));
+		// Espera pelo texto estar presente no value do elemento textfield
 		wait.until(ExpectedConditions
 				.textToBePresentInElementValue(tfTotal, total.toString()));
 		
