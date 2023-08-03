@@ -37,7 +37,7 @@ public class TableTest {
 		WebElement td = driver.findElement(By.xpath("//td[contains(text(),'"+nome+"')]"));
 		String nomeCapturado = td.getText();
 		
-		WebElement tfReserva = driver.findElement(By.xpath("//*[@id='txt01']"));
+		WebElement tfReserva = driver.findElement(By.cssSelector("#txt01"));
 		tfReserva.sendKeys(nomeCapturado);
 		
 		Thread.sleep(3000);		
@@ -46,8 +46,19 @@ public class TableTest {
 	}
 	
 	@Test
-	public void testCheckBox() throws InterruptedException {
+	public void testCheckBoxParentChild() throws InterruptedException {
 		WebElement cb = driver.findElement(By.xpath("//*[.='Fulano da Silva']/../td/input"));
+		
+		cb.click();
+		
+		assertTrue(cb.isSelected());
+		Thread.sleep(3000);
+	}
+	
+	@Test
+	public void testCheckBoxSibling() throws InterruptedException {		
+		WebElement cb = driver.findElement(By.xpath("//*[contains(text(),'Beck')]/following-sibling::td[2]/input"));
+		
 		cb.click();
 		
 		assertTrue(cb.isSelected());
