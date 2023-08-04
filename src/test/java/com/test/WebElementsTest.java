@@ -1,44 +1,38 @@
 package com.test;
 
+import static com.core.DriverFactory.getDriver;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class WebElementsTest {
+import com.core.BaseTest;
 
-	private WebDriver driver;
+public class WebElementsTest extends BaseTest{
 
+	//Shotcuts:
+	// Organiza os imports: Ctrl + shift + o
+	// Faz o import static: Ctrl + shift + m
+	
 	@Before
 	public void setUp() throws Exception {
-		System.setProperty("webdriver.chrome.driver", "/home/atrindade/Dev/drivers/chromedriver");
-		// System.setProperty("webdriver.chrome.driver",
-		// "C:\\Drivers\\chromedriver.exe");
-		driver = new ChromeDriver();
-		driver.get("http://antoniotrindade.com.br/treinoautomacao/elementsweb.html");
-	}
-
-	@After
-	public void tearDown() throws Exception {
-		driver.quit();
-	}
+		//Ctrl + Shift + M		
+		getDriver().get("http://antoniotrindade.com.br/treinoautomacao/elementsweb.html");
+	}	
 
 	@Test
 	public void testValidaTextField() throws InterruptedException {
 
 		// Identifica o elemento na página
-		WebElement textFieldBox1 = driver.findElement(By.name("txtbox1"));		
+		WebElement textFieldBox1 = getDriver().findElement(By.name("txtbox1"));		
 
 		// Faz a iteração com o elemento
 		textFieldBox1.sendKeys("Antônio Trindade");
@@ -52,8 +46,8 @@ public class WebElementsTest {
 	@Test
 	public void testValidaStatusTextFields() {
 		// Identificar os elementos
-		WebElement textFieldBoxEnable = driver.findElement(By.name("txtbox1"));
-		WebElement textFieldBoxDisable = driver.findElement(By.name("txtbox2"));
+		WebElement textFieldBoxEnable = getDriver().findElement(By.name("txtbox1"));
+		WebElement textFieldBoxDisable = getDriver().findElement(By.name("txtbox2"));
 
 		// Faz a validação
 		assertTrue(textFieldBoxEnable.isEnabled());
@@ -63,7 +57,7 @@ public class WebElementsTest {
 	@Test
 	public void testValidaRadioButton() throws InterruptedException {
 		// Identicar os elementos
-		List<WebElement> radioButtons = driver.findElements(By.name("radioGroup1"));
+		List<WebElement> radioButtons = getDriver().findElements(By.name("radioGroup1"));
 		
 		//radioButtons.get(2).click();
 		
@@ -89,7 +83,7 @@ public class WebElementsTest {
 	public void testValidaCheckBox() throws InterruptedException {
 		
 		// Identicar os elementos
-		List<WebElement> checkBoxes = driver.findElements(By.name("chkbox"));
+		List<WebElement> checkBoxes = getDriver().findElements(By.name("chkbox"));
 		
 		for (WebElement cb : checkBoxes) {
 			if ((cb.getAttribute("value").equals("Check 3")) 
@@ -110,7 +104,7 @@ public class WebElementsTest {
 	
 	@Test
 	public void testValidaSelectSingle() throws InterruptedException {
-		WebElement elementSelectSingle = driver.findElement(By.name("dropdownlist"));
+		WebElement elementSelectSingle = getDriver().findElement(By.name("dropdownlist"));
 		
 		Select selectSingle = new Select(elementSelectSingle);
 		
@@ -134,7 +128,7 @@ public class WebElementsTest {
 	
 	@Test
 	public void testValidaSelectMulti() throws InterruptedException {
-		WebElement elementSelectMulti = driver.findElement(By.name("multiselectdropdown"));
+		WebElement elementSelectMulti = getDriver().findElement(By.name("multiselectdropdown"));
 		
 		Select selectMulti = new Select(elementSelectMulti);
 		
@@ -170,9 +164,9 @@ public class WebElementsTest {
 	public void testValidaIframe() throws InterruptedException {
 		
 		// Entrar no iframe				
-		driver.switchTo().frame(0);
+		getDriver().switchTo().frame(0);
 		
-		WebElement tfiFrame = driver.findElement(By.id("tfiframe"));
+		WebElement tfiFrame = getDriver().findElement(By.id("tfiframe"));
 		tfiFrame.sendKeys("Hello world!");
 		
 		Thread.sleep(3000);
@@ -180,47 +174,47 @@ public class WebElementsTest {
 		assertEquals("Hello world!", tfiFrame.getAttribute("value"));
 		
 		// Volta para página de origem
-		driver.switchTo().defaultContent();
+		getDriver().switchTo().defaultContent();
 		
-		WebElement btnAlert = driver.findElement(By.name("alertbtn"));
+		WebElement btnAlert = getDriver().findElement(By.name("alertbtn"));
 		assertTrue(btnAlert.isEnabled());
 		
 		// Entrar no iframe				
-		driver.switchTo().frame(0);
+		getDriver().switchTo().frame(0);
 		
-		WebElement btnIframe = driver.findElement(By.id("btniframe"));
+		WebElement btnIframe = getDriver().findElement(By.id("btniframe"));
 		assertTrue(btnIframe.isEnabled());
 		
 	}
 	
 	@Test
 	public void testValidaAlerts() throws InterruptedException {
-		WebElement btnAlert = driver.findElement(By.name("alertbtn"));
+		WebElement btnAlert = getDriver().findElement(By.name("alertbtn"));
 		btnAlert.click();
 		
-		Alert alert = driver.switchTo().alert();
+		Alert alert = getDriver().switchTo().alert();
 		assertEquals("Eu sou um alerta!", alert.getText());
 		//Clique no Ok, ou teclar o ENTER
 		alert.accept();
 		
-		WebElement btnConfirm = driver.findElement(By.name("confirmbtn"));
+		WebElement btnConfirm = getDriver().findElement(By.name("confirmbtn"));
 		btnConfirm.click();
 		
-		Alert confirm = driver.switchTo().alert();
+		Alert confirm = getDriver().switchTo().alert();
 		assertEquals("Pressione um botão!", confirm.getText());		
 		confirm.dismiss();
 		
-		WebElement btnPrompt = driver.findElement(By.id("promptBtn"));
+		WebElement btnPrompt = getDriver().findElement(By.id("promptBtn"));
 		btnPrompt.click();
 		
-		Alert prompt = driver.switchTo().alert();
+		Alert prompt = getDriver().switchTo().alert();
 		assertEquals("Digite o ano:", prompt.getText());		
 		prompt.sendKeys("2023");		
 		prompt.accept();
 		
 		Thread.sleep(3000);
 		
-		prompt = driver.switchTo().alert();
+		prompt = getDriver().switchTo().alert();
 		assertEquals("O ano é 2023?", prompt.getText());		
 	}
 	
