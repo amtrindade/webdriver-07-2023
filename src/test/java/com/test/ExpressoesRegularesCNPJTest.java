@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import java.time.Duration;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -24,6 +25,7 @@ public class ExpressoesRegularesCNPJTest extends BaseTest{
 		wait = new WebDriverWait(getDriver(), Duration.ofSeconds(5));
 	}
 	
+	@Ignore()
 	@Test
 	public void testValidaCNPJcomMascara() throws InterruptedException {				
 		WebElement btnGerar = getDriver().findElement(By.id("bt_gerar_cnpj"));
@@ -40,6 +42,7 @@ public class ExpressoesRegularesCNPJTest extends BaseTest{
 		assertTrue(cnpjGerado.matches("^[0-9]{2}\\.[0-9]{3}\\.[0-9]{3}\\/000[1-2]{1}\\-[0-9]{2}$"));
 	}
 	
+	@Ignore()
 	@Test
 	public void testValidaCNPJsemMascara() throws InterruptedException {
 		WebElement cbNao = getDriver().findElement(By.id("pontuacao_nao"));

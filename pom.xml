@@ -4,7 +4,6 @@
 	<artifactId>curso-webdriver-07-2023</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>CursoWebdriver</name>
-	
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -12,11 +11,16 @@
 			<version>4.13.2</version>
 			<scope>test</scope>
 		</dependency>
-		
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
 			<version>4.10.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.13.0</version>
 		</dependency>
 		
 	</dependencies>

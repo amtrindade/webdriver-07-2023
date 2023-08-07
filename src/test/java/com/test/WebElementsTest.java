@@ -212,10 +212,17 @@ public class WebElementsTest extends BaseTest{
 		prompt.sendKeys("2023");		
 		prompt.accept();
 		
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		
 		prompt = getDriver().switchTo().alert();
-		assertEquals("O ano é 2023?", prompt.getText());		
+		assertEquals("O ano é 2023?", prompt.getText());
+		prompt.accept();
+		
+		Thread.sleep(2000);
+		
+		prompt = getDriver().switchTo().alert();
+		prompt.accept();		
+		
 	}
 	
 }
