@@ -4,7 +4,9 @@ import java.time.Duration;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 public class DriverFactory {
 	
@@ -22,9 +24,29 @@ public class DriverFactory {
 				driver = new ChromeDriver();
 			}
 			
+			else if (browser.equals("chrome-headless")) {
+				System.setProperty("webdriver.chrome.driver", path + "chromedriver");
+				
+				ChromeOptions options = new ChromeOptions();
+				options.addArguments("--headless");
+				options.addArguments("--window-size=1200x960");
+				
+				driver = new ChromeDriver(options);				
+			}
+			
 			else if (browser.equals("firefox")) {
 				System.setProperty("webdriver.geckodriver.driver", path + "geckodriver");
 				driver = new FirefoxDriver();				
+			}
+			
+			else if (browser.equals("firefox-headless")) {
+				System.setProperty("webdriver.geckodriver.driver", path + "geckodriver");
+				
+				FirefoxOptions options = new FirefoxOptions();
+				options.addArguments("--headless");
+				options.addArguments("--window-size=1200x960");
+				
+				driver = new FirefoxDriver(options);				
 			}
 			
 			else {
