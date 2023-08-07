@@ -4,6 +4,7 @@ import java.time.Duration;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class DriverFactory {
 	
@@ -12,8 +13,24 @@ public class DriverFactory {
 	public static WebDriver getDriver() {
 		
 		if (driver == null) {
-			System.setProperty("webdriver.chrome.driver", "/home/atrindade/Dev/drivers/chromedriver");
-			driver = new ChromeDriver();
+			
+			String browser = GlobalProperty.getProperty("webdriver.browser");
+			String path = GlobalProperty.getProperty("webdriver.path");
+			
+			if (browser.equals("chrome")) {				
+				System.setProperty("webdriver.chrome.driver", path + "chromedriver");
+				driver = new ChromeDriver();
+			}
+			
+			else if (browser.equals("firefox")) {
+				System.setProperty("webdriver.geckodriver.driver", path + "geckodriver");
+				driver = new FirefoxDriver();				
+			}
+			
+			else {
+				System.out.println("Driver não está configurado corretamente");				
+			}
+			
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));			
 		}		
 		return driver;
