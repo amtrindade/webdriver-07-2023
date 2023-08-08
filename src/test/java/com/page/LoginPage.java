@@ -5,10 +5,12 @@ import static com.core.DriverFactory.getDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import com.core.GlobalProperty;
+
 public class LoginPage {
 	
 	public LoginPage open() {
-		getDriver().get("https://center.umov.me/");
+		getDriver().get(GlobalProperty.getProperty("webdriver.url.dese"));
 		return this;
 	}
 
@@ -34,7 +36,7 @@ public class LoginPage {
 		WebElement btnLogar = getDriver().findElement(By.id("submit_button"));
 		btnLogar.click();
 		
-		return new MainPage();
+		return new MainPage();		
 	}
 
 }

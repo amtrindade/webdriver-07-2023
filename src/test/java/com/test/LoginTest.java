@@ -1,5 +1,7 @@
 package com.test;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
 import com.core.BaseTest;
@@ -16,11 +18,12 @@ public class LoginTest extends BaseTest{
 		loginPage = new LoginPage();
 		
 		loginPage.open();
-		loginPage.inputEnvironment("trocaraqui");
-		loginPage.inputUserName("trocaraqui");
-		loginPage.inputPassword("trocaraqui");
+		loginPage.inputEnvironment("xxxx");
+		loginPage.inputUserName("xxxx");
+		loginPage.inputPassword("xxxx");
 		
 		mainPage = loginPage.clickLogar();
+		assertEquals("Aluno 01 (aluno01)", mainPage.getTextAvatar());
 		
 	}
 

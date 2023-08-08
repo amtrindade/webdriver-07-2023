@@ -19,7 +19,7 @@ public abstract class BaseTest {
 	
 	@After
 	public void tearDown() throws IOException {		
-		//screenshot da tela
+		//screenshot da tela		
 		File screenShot = ((TakesScreenshot)getDriver()).getScreenshotAs(OutputType.FILE);
 		//salva o arquivo na pasta
 		FileUtils.copyFile(screenShot, new File("target" + File.separator + testName.getMethodName()+".jpg"));
