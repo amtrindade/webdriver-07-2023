@@ -38,5 +38,17 @@ public class LoginPage {
 		
 		return new MainPage();		
 	}
+	
+	public LoginPage clickLogarInvalido() {
+		WebElement btnLogar = getDriver().findElement(By.id("submit_button"));
+		btnLogar.click();
+		
+		return this;
+	}
+	
+	public String getMessageError() {
+		WebElement liMessageError = getDriver().findElement(By.xpath("//li[@class='nm-li nm-message-error']"));
+		return liMessageError.getText();
+	}
 
 }

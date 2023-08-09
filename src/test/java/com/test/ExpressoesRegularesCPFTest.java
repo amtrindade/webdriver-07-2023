@@ -1,32 +1,28 @@
 package com.test;
 
-import static com.core.DriverFactory.getDriver;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 import com.core.BaseTest;
+import com.page.CpfPage;
 
 public class ExpressoesRegularesCPFTest extends BaseTest {
 	
+	private CpfPage cpfPage;
+	
 	@Before
-	public void setUp() throws Exception {	
-		getDriver().get("https://www.geradordecpf.org/");
+	public void setUp() {
+		cpfPage = new CpfPage();		
+		cpfPage.open();
 	}
 	
 	@Test
-	public void testCpfComPontuacao() {
-		WebElement cbPontos = getDriver().findElement(By.id("cbPontos"));
-		cbPontos.click();
-		
-		WebElement btnGerar = getDriver().findElement(By.id("btn-gerar-cpf"));
-		btnGerar.click();
-		
-		WebElement tfCpf = getDriver().findElement(By.id("numero"));
-		String cpfGerado = tfCpf.getAttribute("value");
+	public void testCpfComPontuacao() {		
+		cpfPage.clickCbPontuacao();
+		cpfPage.clickButtonGerar();
+		String cpfGerado = cpfPage.getTextCpf();	
 		
 		System.out.println(cpfGerado);
 		
@@ -35,11 +31,8 @@ public class ExpressoesRegularesCPFTest extends BaseTest {
 	
 	@Test
 	public void testCpfSemPontuacao() {
-		WebElement btnGerar = getDriver().findElement(By.id("btn-gerar-cpf"));
-		btnGerar.click();
-		
-		WebElement tfCpf = getDriver().findElement(By.id("numero"));
-		String cpfGerado = tfCpf.getAttribute("value");
+		cpfPage.clickButtonGerar();
+		String cpfGerado = cpfPage.getTextCpf();
 		
 		System.out.println(cpfGerado);
 		
